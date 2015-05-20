@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.jking31cs.vector.Vector2DTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2015-05-20T13:20:04" hostname="Jamess-iMac" time="0.001">
+  <properties/>
+  <testcase name="testCreation" classname="com.jking31cs.vector.Vector2DTest" time="0.0"/>
+  <testcase name="testAddition" classname="com.jking31cs.vector.Vector2DTest" time="0.0"/>
+  <testcase name="testDotProduct" classname="com.jking31cs.vector.Vector2DTest" time="0.0"/>
+  <testcase name="testSubtraction" classname="com.jking31cs.vector.Vector2DTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

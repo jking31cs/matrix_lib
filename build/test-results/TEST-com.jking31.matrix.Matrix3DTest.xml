@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.jking31.matrix.Matrix3DTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-05-20T00:34:37" hostname="Jamess-iMac" time="0.002">
+<testsuite name="com.jking31.matrix.Matrix3DTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2015-05-20T13:20:04" hostname="Jamess-iMac" time="0.003">
   <properties/>
-  <testcase name="testMatrixMul" classname="com.jking31.matrix.Matrix3DTest" time="0.002"/>
+  <testcase name="testCreation" classname="com.jking31.matrix.Matrix3DTest" time="0.002"/>
+  <testcase name="testMatrixVectorMul" classname="com.jking31.matrix.Matrix3DTest" time="0.0"/>
+  <testcase name="testMatrixMul" classname="com.jking31.matrix.Matrix3DTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
