@@ -9,7 +9,7 @@ public class VectorND {
 
     public final float[] values;
 
-    public VectorND(float[] values) {
+    public VectorND(float...values) {
         this.values = values;
     }
 

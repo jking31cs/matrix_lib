@@ -1,6 +1,5 @@
-package com.jking31.matrix;
+package com.jking31cs.matrix;
 
-import com.jking31cs.matrix.Matrix3D;
 import com.jking31cs.vector.Vector3D;
 import org.junit.Test;
 
