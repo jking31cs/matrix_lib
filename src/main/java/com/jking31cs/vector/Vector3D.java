@@ -6,7 +6,7 @@ import java.util.Objects;
  * Three Dimensional Vector.
  */
 public class Vector3D {
-    
+
     public final float x,y,z;
 
     public Vector3D(float x, float y, float z) {
@@ -74,5 +74,23 @@ public class Vector3D {
                 b.x*z-b.z*x,
                 x*b.y-b.x*y
         );
+    }
+
+    public float mag() {
+        return (float) Math.sqrt(x*x + y*y + z*z);
+    }
+
+    public Vector3D norm() {
+        return new Vector3D(x/mag(), y/mag(), z/mag());
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Vector3D{");
+        sb.append("x=").append(x);
+        sb.append(", y=").append(y);
+        sb.append(", z=").append(z);
+        sb.append('}');
+        return sb.toString();
     }
 }
