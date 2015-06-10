@@ -93,4 +93,8 @@ public class Vector3D {
         sb.append('}');
         return sb.toString();
     }
+
+    public Vector3D mul(float s) {
+        return new Vector3D(s*x, s*y, s*z);
+    }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.jking31cs.light.PointLight;
 import com.jking31cs.matrix.Matrix;
 import com.jking31cs.projection.CameraTransformMatrixGenerator;
 import com.jking31cs.projection.ProjectionMatrixGenerator;
@@ -17,6 +18,10 @@ import com.jking31cs.vector.Vector2D;
 import com.jking31cs.vector.Vector3D;
 import com.jking31cs.vector.VectorND;
 import processing.core.PApplet;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * Created by jking31 on 5/22/15.
@@ -30,6 +35,7 @@ public class MyApplet extends PApplet {
     Matrix matrix;
 
     List<Triangle> triangles;
+    PointLight light;
 
     @Override
     public void setup() {
@@ -39,6 +45,7 @@ public class MyApplet extends PApplet {
         matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI / 3, 20, 50, 1);
 
         triangles = new ArrayList<>();
+        light = new PointLight(new Vector3D(0,0,0), new Color(.5f, .5f, .5f), .5f);
 
         selectInput("Open file", "readFile");
     }
@@ -50,7 +57,7 @@ public class MyApplet extends PApplet {
 
     @Override
     public void draw() {
-        background(255);
+        background(0);
         drawTriangles();
     }
 
@@ -62,8 +69,9 @@ public class MyApplet extends PApplet {
             Vector2D p2 = transform(t.p2);
             Vector2D p3 = transform(t.p3);
 
-            Color c = t.light.colorMultiply(t.material);
-            fill(c.x, c.y, c.z);
+            Color c = calcColor(t);
+           // System.out.println("Color: " + c.x + " " + c.y + " " + c.z);
+            fill(c.x * 255f, c.y * 255f, c.z * 255f);
             triangle(midX - p1.x, midY - p1.y, midX - p2.x, midY - p2.y, midX - p3.x, midY - p3.y);
         }
     }
@@ -80,19 +88,17 @@ public class MyApplet extends PApplet {
 
     }
 
-    @Override
-    public void keyPressed(KeyEvent event) {
-        if (event.getKeyChar() == 'a') {
-            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.Y, PI / 12);
-        } else if (event.getKeyChar() == 'd') {
-            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.Y, -PI / 12);
-        } else if (event.getKeyChar() == 's') {
-            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.X, PI / 12);
-        } else if (event.getKeyChar() == 'w') {
-            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.X, -PI / 12);
-        }
-        System.out.println("Camera Loc: " + cameraLoc);
-        System.out.println(lookAtPoint);
+    private Color calcColor(Triangle t) {
+        Vector3D L = light.position.sub(t.getCentroid()).norm();
+        Vector3D n = t.getNormal();
+        Color diffuse = new Color(t.m_diffuse.mul(Math.max(L.dot(n), 0)));
+        Color ambient = t.m_ambient;
+        //System.out.println("Diffuse: " + diffuse);
+        return new Color(ambient.colorMultiply(light.lightColor).add(diffuse.colorMultiply(getDiffuseLightColor())));
+    }
+
+    private Color getDiffuseLightColor() {
+        return new Color(new Vector3D(1, 1, 1).mul(light.strength));
     }
 
 
