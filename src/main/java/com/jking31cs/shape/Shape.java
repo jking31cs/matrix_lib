@@ -23,6 +23,7 @@ public class Shape {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         while ((line = reader.readLine()) != null) {
+            line = line.trim();
             String[] s = line.split("\\s+");
             if (s.length != 9) {
                 throw new RuntimeException("Invalid format");
@@ -31,6 +32,7 @@ public class Shape {
                 new Vector3D(Float.parseFloat(s[0]),Float.parseFloat(s[1]),Float.parseFloat(s[2])),
                 new Vector3D(Float.parseFloat(s[3]),Float.parseFloat(s[4]),Float.parseFloat(s[5])),
                 new Vector3D(Float.parseFloat(s[6]),Float.parseFloat(s[7]),Float.parseFloat(s[8])),
+                new Color(.2f,.2f,.2f),
                 new Color(1,0,0),
                 new Color(1,1,1)
             ));

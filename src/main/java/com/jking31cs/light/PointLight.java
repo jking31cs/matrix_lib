@@ -13,6 +13,7 @@ public class PointLight {
     public final Vector3D position;
     public final Color lightColor;
     public final float strength;
+    public final float spec;
 
     @Override
     public boolean equals(Object o) {
@@ -29,11 +30,12 @@ public class PointLight {
         return Objects.hash(position, lightColor, strength);
     }
 
-    public PointLight(Vector3D position, Color lightColor, float strength) {
+    public PointLight(Vector3D position, Color lightColor, float strength, float spec) {
         this.position = position;
         this.lightColor = lightColor;
 
         this.strength = strength;
+        this.spec = spec;
     }
 
 }

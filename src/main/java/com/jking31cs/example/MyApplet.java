@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.jking31cs.light.PointLight;
@@ -18,10 +17,6 @@ import com.jking31cs.vector.Vector2D;
 import com.jking31cs.vector.Vector3D;
 import com.jking31cs.vector.VectorND;
 import processing.core.PApplet;
-
-import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * Created by jking31 on 5/22/15.
@@ -45,7 +40,7 @@ public class MyApplet extends PApplet {
         matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI / 3, 20, 50, 1);
 
         triangles = new ArrayList<>();
-        light = new PointLight(new Vector3D(0,0,0), new Color(.5f, .5f, .5f), .5f);
+        light = new PointLight(new Vector3D(100,100,100), new Color(1f, 1f, 1f), .5f, 3f);
 
         selectInput("Open file", "readFile");
     }
@@ -72,6 +67,7 @@ public class MyApplet extends PApplet {
             Color c = calcColor(t);
            // System.out.println("Color: " + c.x + " " + c.y + " " + c.z);
             fill(c.x * 255f, c.y * 255f, c.z * 255f);
+            stroke(c.x * 255f, c.y * 255f, c.z * 255f);
             triangle(midX - p1.x, midY - p1.y, midX - p2.x, midY - p2.y, midX - p3.x, midY - p3.y);
         }
     }
@@ -84,7 +80,7 @@ public class MyApplet extends PApplet {
         //Now project it
         p_4 = matrix.mul(cam_matrix).mul(p_4);
 
-        return new Vector2D(p_4.values[0], p_4.values[1]);
+        return new Vector2D(p_4.values[0]*10, p_4.values[1]*10);
 
     }
 
@@ -93,13 +89,38 @@ public class MyApplet extends PApplet {
         Vector3D n = t.getNormal();
         Color diffuse = new Color(t.m_diffuse.mul(Math.max(L.dot(n), 0)));
         Color ambient = t.m_ambient;
+
+        Vector3D E = cameraLoc.sub(t.getCentroid()).norm();
+        Vector3D H = L.add(E).mul(1f / (L.add(E).mag()));
+
+        Color spec = new Color(t.m_spec.mul((float) Math.pow(Math.max(H.dot(n), 0), light.spec)));
         //System.out.println("Diffuse: " + diffuse);
-        return new Color(ambient.colorMultiply(light.lightColor).add(diffuse.colorMultiply(getDiffuseLightColor())));
+        return new Color(ambient.colorMultiply(light.lightColor).add(diffuse.colorMultiply(getDiffuseLightColor())).add(spec));
     }
 
     private Color getDiffuseLightColor() {
         return new Color(new Vector3D(1, 1, 1).mul(light.strength));
     }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        if (event.getKeyChar() == 'a') {
+            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.Y, PI / 12);
+        } else if (event.getKeyChar() == 'd') {
+            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.Y, -PI / 12);
+        } else if (event.getKeyChar() == 's') {
+            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.X, PI / 12);
+        } else if (event.getKeyChar() == 'w') {
+            cameraLoc = CameraTransformMatrixGenerator.moveCameraAroundLookAt(cameraLoc, lookAtPoint, CameraTransformMatrixGenerator.Axis.X, -PI / 12);
+        }
+        System.out.println("Camera Loc: " + cameraLoc);
+        System.out.println(lookAtPoint);
+    }
+
+    public static void main(String[] args) {
+        PApplet.main("MyApplet", args);
+    }
+
 
 
 }
