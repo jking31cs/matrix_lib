@@ -1,12 +1,16 @@
 package com.jking31cs.example;
 
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.jking31cs.matrix.Matrix;
 import com.jking31cs.projection.CameraTransformMatrixGenerator;
 import com.jking31cs.projection.ProjectionMatrixGenerator;
+import com.jking31cs.shape.Shape;
 import com.jking31cs.triangle.Color;
 import com.jking31cs.triangle.Triangle;
 import com.jking31cs.vector.Vector2D;
@@ -34,15 +38,14 @@ public class MyApplet extends PApplet {
         lookAtPoint = new Vector3D(0,0,15);
         matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI / 3, 20, 50, 1);
 
-        triangles = Arrays.asList(
-            new Triangle(
-                new Vector3D(250,25,2),
-                new Vector3D(25,400,3),
-                new Vector3D(-25,-300,2),
-                new Color(1,1,1),
-                new Color(255,0,0)
-            )
-        );
+        triangles = new ArrayList<>();
+
+        selectInput("Open file", "readFile");
+    }
+
+    public void readFile(File file) throws IOException {
+        Shape shape = Shape.readFromFile(file);
+        triangles = shape.triangleList;
     }
 
     @Override
@@ -69,12 +72,11 @@ public class MyApplet extends PApplet {
         //First rotate it so it's in the correct location by the camera perspective.
         VectorND p_4 = new VectorND(p.x, p.y, p.z, 1);
         Matrix cam_matrix = CameraTransformMatrixGenerator.generate(cameraLoc, lookAtPoint);
-        p_4 = cam_matrix.mul(p_4);
 
         //Now project it
-        p_4 = matrix.mul(p_4);
+        p_4 = matrix.mul(cam_matrix).mul(p_4);
 
-        return new Vector2D(p_4.values[0]/p.z, p_4.values[1]/p.z);
+        return new Vector2D(p_4.values[0], p_4.values[1]);
 
     }
 

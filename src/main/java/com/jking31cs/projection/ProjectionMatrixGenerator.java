@@ -11,11 +11,11 @@ public class ProjectionMatrixGenerator {
     private float fov, nearPlane, farPlane, aspectRatio;
 
     public static Matrix getProjectionMatrix(float fov, float nearPlane, float farPlane, float aspectRatio) {
-        return new Matrix(new float[][] {
+        return (new Matrix(new float[][] {
             new float[]{(float) ((1f/ aspectRatio)*(1/tan(fov/2))), 0,0,0},
             new float[]{0, (float) (1/tan(fov/2)), 0, 0},
             new float[]{0, 0, farPlane /(farPlane - nearPlane), -(farPlane * nearPlane)/(farPlane - nearPlane)},
             new float[]{0,0,1,0}
-        });
+        })).transpose();
     }
 }

@@ -20,12 +20,12 @@ public class CameraTransformMatrixGenerator {
         Vector3D vx = new Vector3D(0,1,0).cross(vz).norm();
         Vector3D vy = vz.cross(vx);
 
-        return new Matrix(new float[][] {
+        return (new Matrix(new float[][] {
             new float[] {vx.x, vy.x, vz.x, cameraLoc.x},
             new float[] {vx.y, vy.y, vz.y, cameraLoc.y},
             new float[] {vx.z, vy.z, vz.z, cameraLoc.z},
             new float[] {0, 0, 0, 1},
-        });
+        })).transpose();
     }
 
     public static Vector3D moveCameraAroundLookAt(
