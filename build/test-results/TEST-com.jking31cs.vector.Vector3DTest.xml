@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.jking31cs.vector.Vector3DTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2015-06-10T12:18:42" hostname="Jamess-iMac" time="0.001">
+<testsuite name="com.jking31cs.vector.Vector3DTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2015-06-10T14:18:01" hostname="sis-jrk-l01.ctisl.gtri.org" time="0.003">
   <properties/>
   <testcase name="testCreation" classname="com.jking31cs.vector.Vector3DTest" time="0.0"/>
   <testcase name="testCrossProduct2" classname="com.jking31cs.vector.Vector3DTest" time="0.0"/>
-  <testcase name="testAddition" classname="com.jking31cs.vector.Vector3DTest" time="0.001"/>
+  <testcase name="testAddition" classname="com.jking31cs.vector.Vector3DTest" time="0.0"/>
   <testcase name="testDotProduct" classname="com.jking31cs.vector.Vector3DTest" time="0.0"/>
   <testcase name="testCrossProduct" classname="com.jking31cs.vector.Vector3DTest" time="0.0"/>
   <testcase name="testSubtraction" classname="com.jking31cs.vector.Vector3DTest" time="0.0"/>

@@ -118,7 +118,7 @@ public class MyApplet extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main("MyApplet", args);
+        PApplet.main(MyApplet.class.getName(), args);
     }
 
 
