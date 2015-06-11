@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.jking31cs.light.PointLight;
@@ -35,9 +37,9 @@ public class MyApplet extends PApplet {
     @Override
     public void setup() {
         size(500,500);
-        cameraLoc = new Vector3D(0,0,0);
-        lookAtPoint = new Vector3D(0,0,15);
-        matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI / 3, 20, 50, 1);
+        cameraLoc = new Vector3D(0,0,50);
+        lookAtPoint = new Vector3D(0,0,0);
+        matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI/8, 20, 50, 1);
 
         triangles = new ArrayList<>();
         light = new PointLight(new Vector3D(100,100,100), new Color(1f, 1f, 1f), .5f, 3f);
@@ -48,11 +50,27 @@ public class MyApplet extends PApplet {
     public void readFile(File file) throws IOException {
         Shape shape = Shape.readFromFile(file);
         triangles = shape.triangleList;
+
     }
 
     @Override
     public void draw() {
         background(0);
+        final Matrix cam_matrix = CameraTransformMatrixGenerator.generate(cameraLoc, lookAtPoint);
+        triangles.sort(new Comparator<Triangle>() {
+            @Override
+            public int compare(Triangle o1, Triangle o2) {
+                Float z1 = transformPoint(o1.getCentroid()).values[2];
+                Float z2 = transformPoint(o2.getCentroid()).values[2];
+                return z1.compareTo(z2);
+            }
+
+            private VectorND transformPoint(Vector3D p) {
+                VectorND p_4 = new VectorND(p.x, p.y, p.z, 1);
+                return cam_matrix.mul(p_4);
+            }
+        });
+        Collections.reverse(triangles);
         drawTriangles();
     }
 
@@ -79,8 +97,10 @@ public class MyApplet extends PApplet {
 
         //Now project it
         p_4 = matrix.mul(cam_matrix).mul(p_4);
-
-        return new Vector2D(p_4.values[0]*10, p_4.values[1]*10);
+        if (p_4.values[3] == p.z) {
+            System.out.println("Things are working");
+        }
+        return new Vector2D(p_4.values[0], p_4.values[1]);
 
     }
 

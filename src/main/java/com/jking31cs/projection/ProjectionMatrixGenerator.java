@@ -14,8 +14,8 @@ public class ProjectionMatrixGenerator {
         return (new Matrix(new float[][] {
             new float[]{(float) ((1f/ aspectRatio)*(1/tan(fov/2))), 0,0,0},
             new float[]{0, (float) (1/tan(fov/2)), 0, 0},
-            new float[]{0, 0, farPlane /(farPlane - nearPlane), -(farPlane * nearPlane)/(farPlane - nearPlane)},
-            new float[]{0,0,1,0}
+            new float[]{0, 0, farPlane /(nearPlane - farPlane), -1},
+            new float[]{0,0,(farPlane*nearPlane) / (nearPlane - farPlane),0}
         })).transpose();
     }
 }
