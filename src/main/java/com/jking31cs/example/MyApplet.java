@@ -39,7 +39,7 @@ public class MyApplet extends PApplet {
         size(500,500);
         cameraLoc = new Vector3D(0,0,50);
         lookAtPoint = new Vector3D(0,0,0);
-        matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI/8, 20, 50, 1);
+        matrix = ProjectionMatrixGenerator.getProjectionMatrix((float) Math.PI/3, 1, 5, 1);
 
         triangles = new ArrayList<>();
         light = new PointLight(new Vector3D(100,100,100), new Color(1f, 1f, 1f), .5f, 3f);
@@ -86,7 +86,7 @@ public class MyApplet extends PApplet {
            // System.out.println("Color: " + c.x + " " + c.y + " " + c.z);
             fill(c.x * 255f, c.y * 255f, c.z * 255f);
             stroke(c.x * 255f, c.y * 255f, c.z * 255f);
-            triangle(midX - p1.x, midY - p1.y, midX - p2.x, midY - p2.y, midX - p3.x, midY - p3.y);
+            triangle(midX - p1.x, midY + p1.y, midX - p2.x, midY + p2.y, midX - p3.x, midY + p3.y);
         }
     }
 
@@ -100,7 +100,7 @@ public class MyApplet extends PApplet {
         if (p_4.values[3] == p.z) {
             System.out.println("Things are working");
         }
-        return new Vector2D(p_4.values[0], p_4.values[1]);
+        return new Vector2D(p_4.values[0]*250/p_4.values[3], p_4.values[1]*250/p_4.values[3]);
 
     }
 

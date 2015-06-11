@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.jking31cs.vector.VectorNDTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2015-06-10T19:54:45" hostname="sis-jrk-l01.ctisl.gtri.org" time="0.002">
+<testsuite name="com.jking31cs.vector.VectorNDTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2015-06-11T02:27:55" hostname="Jamess-iMac" time="0.002">
   <properties/>
   <testcase name="testCreation" classname="com.jking31cs.vector.VectorNDTest" time="0.0"/>
   <testcase name="testAdd" classname="com.jking31cs.vector.VectorNDTest" time="0.0"/>
@@ -7,7 +7,7 @@
   <testcase name="testSub" classname="com.jking31cs.vector.VectorNDTest" time="0.0"/>
   <testcase name="testSubFails" classname="com.jking31cs.vector.VectorNDTest" time="0.0"/>
   <testcase name="testAddFails" classname="com.jking31cs.vector.VectorNDTest" time="0.0"/>
-  <testcase name="testDotFails" classname="com.jking31cs.vector.VectorNDTest" time="0.0"/>
+  <testcase name="testDotFails" classname="com.jking31cs.vector.VectorNDTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

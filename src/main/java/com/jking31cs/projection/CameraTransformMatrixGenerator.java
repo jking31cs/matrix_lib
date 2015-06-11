@@ -21,10 +21,10 @@ public class CameraTransformMatrixGenerator {
         Vector3D vy = vz.cross(vx);
 
         return (new Matrix(new float[][] {
-            new float[] {vx.x, vy.x, vz.x, cameraLoc.x},
-            new float[] {vx.y, vy.y, vz.y, cameraLoc.y},
-            new float[] {vx.z, vy.z, vz.z, cameraLoc.z},
-            new float[] {0, 0, 0, 1},
+            new float[] {vx.x, vy.x, vz.x, 0},
+            new float[] {vx.y, vy.y, vz.y, 0},
+            new float[] {vx.z, vy.z, vz.z, 0},
+            new float[] {vx.dot(cameraLoc), vy.dot(cameraLoc), vz.dot(cameraLoc), 1},
         })).transpose();
     }
 

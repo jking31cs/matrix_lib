@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.jking31cs.matrix.MatrixTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2015-06-10T19:54:45" hostname="sis-jrk-l01.ctisl.gtri.org" time="0.003">
+<testsuite name="com.jking31cs.matrix.MatrixTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2015-06-11T02:27:55" hostname="Jamess-iMac" time="0.002">
   <properties/>
-  <testcase name="testCreation" classname="com.jking31cs.matrix.MatrixTest" time="0.001"/>
+  <testcase name="testCreation" classname="com.jking31cs.matrix.MatrixTest" time="0.0"/>
   <testcase name="testMulMatrix" classname="com.jking31cs.matrix.MatrixTest" time="0.0"/>
   <testcase name="testMulVector" classname="com.jking31cs.matrix.MatrixTest" time="0.0"/>
   <testcase name="testMulMatrix2" classname="com.jking31cs.matrix.MatrixTest" time="0.0"/>
